@@ -9,6 +9,7 @@ import NotificationPage from "./pages/notificationpage";
 import MessagesPage from "./pages/messagespage";
 import BookmarkPage from "./pages/bookmarkpage";
 import ListPage from "./pages/listspage";
+import WelcomePage from './pages/welcomepage';
 
 import { Route, Switch, useLocation, Redirect } from "react-router-dom";
 import { GlobalStyles } from "./styles/globalstyles";
@@ -61,7 +62,7 @@ function App() {
           {
             currentUser ? <Redirect to='/home' /> : <SignUp />
           }
-        </Route> 
+        </Route>
       </div>
     )
   }
@@ -72,6 +73,7 @@ function App() {
       <GlobalStyles />
       <NavBar currentUser={currentUser} />
       <Switch>
+        <Route path="/:id" component={WelcomePage} />
         <Route path="/home" component={HomePage} />
         <Route path="/profile" component={ProfilePage} />
         <Route path="/explore" component={ExplorePage} />

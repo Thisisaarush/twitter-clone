@@ -1,7 +1,7 @@
 {
   "hosting": {
     "site": "twitter-clone-71ffe",
-    "public": "twitter-clone",
+    "public": "build",
     "ignore": [
       "firebase.json",
       "**/.*",
