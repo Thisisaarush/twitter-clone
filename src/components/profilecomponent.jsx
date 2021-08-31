@@ -3,7 +3,8 @@ import styled from "styled-components";
 import ProfilePic from "./profilepic";
 import Banner from "../assets/banner.jpg";
 
-import Tweet from "./tweet";
+import { ProfileBasic } from "./twitterProfileWidget";
+
 
 const ProfileComponent = () => {
   return (
@@ -41,12 +42,9 @@ const ProfileComponent = () => {
         </UserInfo>
         
       </ProfileStyle>
-
-      <Tweet />
-      <Tweet />
-      <Tweet />
-      <Tweet />
-      <Tweet />
+      
+      <ProfileBasic />
+      
     </ProfileHome>
   );
 };

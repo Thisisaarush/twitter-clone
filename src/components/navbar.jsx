@@ -12,10 +12,12 @@ import { Bookmark } from "@styled-icons/boxicons-regular/Bookmark";
 import { List } from "@styled-icons/fluentui-system-filled/List";
 import { Person } from "@styled-icons/bootstrap/Person";
 import { MoreHorizontal } from "@styled-icons/fluentui-system-filled/MoreHorizontal";
+import { SignOut } from '@styled-icons/octicons/SignOut';
 
 import { Link } from "react-router-dom";
+import { auth } from '../firebase/firebase';
 
-const NavBar = () => {
+const NavBar = ({ currentUser }) => {
   return (
     <Navigation>
       <NavLinks>
@@ -54,6 +56,13 @@ const NavBar = () => {
           <MoreHorizontalIcon />
           <p>More</p>
         </Linked>
+
+        {
+          currentUser ?
+          <Linked to='/' onClick={() => auth.signOut()}> <SignOutIcon /> Sign Out</Linked>
+          :
+          <Linked to='/' > <SignOutIcon /> Sign In</Linked>
+        }
 
         <button>Tweet</button>
 
@@ -131,7 +140,7 @@ const SpanStyle = styled.span`
   align-items: center;
   position: absolute;
   bottom: 10px;
-  padding: 0rem 0.5rem;
+  padding: 0.5rem 0.75rem;
   padding-right: 3rem;
 
   span {
@@ -186,6 +195,11 @@ const PersonIcon = styled(Person)`
 const MoreHorizontalIcon = styled(MoreHorizontal)`
   width: 30px;
   height: 30px;
+`;
+const SignOutIcon = styled(SignOut)`
+  width: 28px;
+  height: 28px;
+  margin-right: 20px;
 `;
 
 export default NavBar;

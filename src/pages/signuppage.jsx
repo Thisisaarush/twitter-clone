@@ -1,14 +1,63 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import BgSignup from "../assets/background.png";
 import TwitterBig from "../assets/twitterbig.svg";
 import TwitterIcon from "../assets/twitter.png";
+import { signInWithGoogle } from "../firebase/firebase";
+import { auth, createUserProfileDocument } from "../firebase/firebase";
 
 const SignUp = () => {
+  const [displayName, setDisplayName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
   useEffect(() => {
     document.title = "Signup / Twitter";
   }, []);
+
+  // handle Submit
+  const handleSubmit = async event => {
+    event.preventDefault();
+
+    if (password !== confirmPassword) {
+      alert("passwords don't match");
+      return;
+    }
+
+    try {
+      const { user } = await auth.createUserWithEmailAndPassword(email, password);
+      await createUserProfileDocument(user, {displayName});
+      
+      setDisplayName('');
+      setEmail('');
+      setPassword('');
+      setConfirmPassword('');
+
+    } catch (error) {
+      alert(error);
+    }
+  }
+
+  // handle Change
+  const handleNameChange = event => {
+    const { value } = event.target;
+    setDisplayName(value);
+  }
+  const handleEmailChange = event => {
+    const { value } = event.target;
+    setEmail(value);
+  }
+  const handlePasswordChange = event => {
+    const { value } = event.target;
+    setPassword(value);
+  }
+  const handleConfirmChange = event => {
+    const { value } = event.target;
+    setConfirmPassword(value);
+  }
+
 
   return (
     <SignUpStyle>
@@ -21,11 +70,21 @@ const SignUp = () => {
         <img src={TwitterIcon} alt="twitter" />
         <h1>Happening Now</h1>
         <h2>Join Twitter today.</h2>
-        <FormStyle>
+
+        <FormStyle onSubmit={handleSubmit}>
           <label htmlFor="name">Name</label>
-          <input type="text" id="name" placeholder="Enter Full Name" required />
+          <input
+            value={displayName}
+            onChange={handleNameChange}
+            type="text"
+            id="name"
+            placeholder="Enter Full Name"
+            required
+          />
           <label htmlFor="email">Email</label>
           <input
+            value={email}
+            onChange={handleEmailChange}
             type="email"
             id="email"
             placeholder="Enter Email Address"
@@ -33,14 +92,26 @@ const SignUp = () => {
           />
           <label htmlFor="password">Password</label>
           <input
+            value={password}
+            onChange={handlePasswordChange}
             type="password"
             id="password"
             placeholder="Enter Password"
             required
           />
+          <label htmlFor="confirmPassword">Confirm Password</label>
+          <input
+            value={confirmPassword}
+            onChange={handleConfirmChange}
+            type="password"
+            id="confirmPassword"
+            placeholder="Confirm Password"
+            required
+          />
           <button type="submit">SignUp</button>
         </FormStyle>
-        <button>Sign in with Google</button>
+
+        <button onClick={signInWithGoogle}>Sign in with Google</button>
       </SignupRight>
     </SignUpStyle>
   );
@@ -51,6 +122,7 @@ const SignUpStyle = styled.div`
   display: flex;
   width: 100vw;
   height: 100vh;
+  overflow-x: hidden;
 `;
 const SignupLeft = styled.div`
   width: 55vw;
@@ -78,7 +150,7 @@ const SignupRight = styled.div`
   }
   h1 {
     font-size: 4rem;
-    margin: 30px 0;
+    margin: 20px 0;
   }
   h2 {
     font-size: 2rem;

@@ -1,13 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { Basic } from './twitterReplyWidget';
+
 
 const TrendingBar = () => {
   return (
     <TrendingStyle>
+
       <InputStyle>
         <input type="text" placeholder='Search Twitter' />
       </InputStyle>
+
+      <Basic />
 
       <Heading>
         <h2>What's happening</h2>

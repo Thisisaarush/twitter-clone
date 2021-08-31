@@ -1,12 +1,17 @@
 {
   "hosting": {
-    "site": "twitterrr",
+    "site": "twitter-clone-71ffe",
     "public": "twitter-clone",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
     ]
   }
 }
-

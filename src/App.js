@@ -10,11 +10,13 @@ import MessagesPage from "./pages/messagespage";
 import BookmarkPage from "./pages/bookmarkpage";
 import ListPage from "./pages/listspage";
 
-import { Route, Switch, useLocation } from "react-router-dom";
+import { Route, Switch, useLocation, Redirect } from "react-router-dom";
 import { GlobalStyles } from "./styles/globalstyles";
 import NavBar from "./components/navbar";
 import TrendingBar from "./components/trendingbar";
 import LoadingAnim from "./assets/loading.svg";
+
+import { auth, createUserProfileDocument } from './firebase/firebase';
 
 function App() {
   // loading screen
@@ -23,6 +25,24 @@ function App() {
     setTimeout(() => {
       setLoading(false)
     }, 500);
+  }, []);
+
+  // google signin states
+  const [currentUser, setCurrentUser] = useState(null);
+  useEffect(() => {
+    auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const userRef = createUserProfileDocument(userAuth);
+        (await userRef).onSnapshot(snapShot => {
+          setCurrentUser({
+            id: snapShot.id,
+            ...snapShot.data()
+          });
+        })
+      } else {
+        setCurrentUser(userAuth);
+      }
+    })
   }, []);
 
   // hide elements on signup page
@@ -37,7 +57,11 @@ function App() {
     : 
       <div> 
         <GlobalStyles /> 
-        <Route exact path="/" component={SignUp} /> 
+        <Route exact path="/">
+          {
+            currentUser ? <Redirect to='/home' /> : <SignUp />
+          }
+        </Route> 
       </div>
     )
   }
@@ -46,7 +70,7 @@ function App() {
     isLoading ? <ImageStyle> <img src={LoadingAnim} alt='Loading...' /> </ImageStyle> :
     <AppStyle>
       <GlobalStyles />
-      <NavBar />
+      <NavBar currentUser={currentUser} />
       <Switch>
         <Route path="/home" component={HomePage} />
         <Route path="/profile" component={ProfilePage} />

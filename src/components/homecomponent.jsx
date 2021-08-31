@@ -5,7 +5,7 @@ import { Sparkles } from '@styled-icons/heroicons-outline/Sparkles';
 import { Image } from '@styled-icons/ionicons-outline/Image';
 import { EmojiSmile } from '@styled-icons/bootstrap/EmojiSmile';
 
-import Tweet from './tweet';
+import { ListBasic } from './twitterUserWidget';
 
 const HomeComponent = () => {
   return (
@@ -30,11 +30,7 @@ const HomeComponent = () => {
         </TweetBar>
       </CreateTweet>
 
-      <Tweet />
-      <Tweet />
-      <Tweet />
-      <Tweet />
-      <Tweet />
+      <ListBasic/>
 
     </Home>
   );
