@@ -4,8 +4,11 @@
 
 # ScreenShots
 
+## Login Page with 'Sign in with Google'
 ![Login Page](./src/screenshots/login.png)
+## Home Page 
 ![Home Page](./src/screenshots/home.png)
+## Profile Page
 ![Profile Page](./src/screenshots/profile.png)
 
 # Technologies used
