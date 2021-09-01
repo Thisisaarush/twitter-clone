@@ -73,7 +73,7 @@ function App() {
       <GlobalStyles />
       <NavBar currentUser={currentUser} />
       <Switch>
-        <Route path="/:id" component={WelcomePage} />
+        <Route path="/twitter-clone" component={WelcomePage} />
         <Route path="/home" component={HomePage} />
         <Route path="/profile" component={ProfilePage} />
         <Route path="/explore" component={ExplorePage} />
