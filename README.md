@@ -4,9 +4,9 @@
 
 # ScreenShots
 
-![Login Page](./screenshots/login.png)
-![Home Page](./screenshots/home.png)
-![Profile Page](./screenshots/profile.png)
+![Login Page](./src/screenshots/login.png)
+![Home Page](./src/screenshots/home.png)
+![Profile Page](./src/screenshots/profile.png)
 
 # Technologies used
 
