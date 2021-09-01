@@ -2,6 +2,16 @@
 
 ### `npm install` then `npm start`
 
+# ScreenShots
+
+![Login Page](./screenshots/login.png)
+![Home Page](./screenshots/home.png)
+![Profile Page](./screenshots/profile.png)
+
+# Technologies used
+
+### React, Firebase for auth and firestore, styled-components, styled-icons, react-twitter-widgets.
+
 
 ## Available Scripts
 
