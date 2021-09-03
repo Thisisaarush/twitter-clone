@@ -1,15 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import styled from "styled-components";
 
-import SignUp from "./pages/signuppage";
-import HomePage from "./pages/homepage";
-import ProfilePage from "./pages/profilepage";
-import ExplorePage from "./pages/explorepage";
-import NotificationPage from "./pages/notificationpage";
-import MessagesPage from "./pages/messagespage";
-import BookmarkPage from "./pages/bookmarkpage";
-import ListPage from "./pages/listspage";
-import WelcomePage from './pages/welcomepage';
 
 import { Route, Switch, useLocation, Redirect } from "react-router-dom";
 import { GlobalStyles } from "./styles/globalstyles";
@@ -18,6 +9,18 @@ import TrendingBar from "./components/trendingbar";
 import LoadingAnim from "./assets/loading.svg";
 
 import { auth, createUserProfileDocument } from './firebase/firebase';
+
+import SignUp from "./pages/signuppage";
+const HomePage = React.lazy(() => import("./pages/homepage"));
+const ProfilePage = React.lazy(() => import("./pages/profilepage"));
+const ExplorePage = React.lazy(() => import("./pages/explorepage"));
+const NotificationPage = React.lazy(() => import("./pages/notificationpage"));
+const MessagesPage = React.lazy(() => import("./pages/messagespage"));
+const BookmarkPage = React.lazy(() => import("./pages/bookmarkpage"));
+const ListPage = React.lazy(() => import("./pages/listspage"));
+const WelcomePage = React.lazy(() => import('./pages/welcomepage'));
+
+
 
 function App() {
   // loading screen
@@ -72,16 +75,18 @@ function App() {
     <AppStyle>
       <GlobalStyles />
       <NavBar currentUser={currentUser} />
-      <Switch>
-        <Route path="/twitter-clone" component={WelcomePage} />
-        <Route path="/home" component={HomePage} />
-        <Route path="/profile" component={ProfilePage} />
-        <Route path="/explore" component={ExplorePage} />
-        <Route path="/notifications" component={NotificationPage} />
-        <Route path="/messages" component={MessagesPage} />
-        <Route path="/bookmarks" component={BookmarkPage} />
-        <Route path="/lists" component={ListPage} />
-      </Switch>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Switch>
+          <Route path="/twitter-clone" component={WelcomePage} />
+          <Route path="/home" component={HomePage} />
+          <Route path="/profile" component={ProfilePage} />
+          <Route path="/explore" component={ExplorePage} />
+          <Route path="/notifications" component={NotificationPage} />
+          <Route path="/messages" component={MessagesPage} />
+          <Route path="/bookmarks" component={BookmarkPage} />
+          <Route path="/lists" component={ListPage} />
+        </Switch>
+      </Suspense>
       <TrendingBar />
     </AppStyle>
   );
