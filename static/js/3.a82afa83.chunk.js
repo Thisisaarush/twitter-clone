@@ -1,0 +1,2 @@
+(this["webpackJsonptwitter-clone"]=this["webpackJsonptwitter-clone"]||[]).push([[3],{98:function(t,e,n){"use strict";n.r(e);var c=n(6),o=n(7);e.default=function(){return Object(c.useEffect)((function(){document.title="Bookmarks / Twitter"}),[]),Object(o.jsx)("div",{children:Object(o.jsx)("h1",{children:"Bookmark Page Coming Soon... "})})}}}]);
+//# sourceMappingURL=3.a82afa83.chunk.js.map

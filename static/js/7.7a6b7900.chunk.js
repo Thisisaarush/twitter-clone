@@ -1,0 +1,2 @@
+(this["webpackJsonptwitter-clone"]=this["webpackJsonptwitter-clone"]||[]).push([[7],{97:function(e,t,n){"use strict";n.r(t);var s=n(6),c=n(7);t.default=function(){return Object(s.useEffect)((function(){document.title="Messages / Twitter"}),[]),Object(c.jsx)("div",{children:Object(c.jsx)("h1",{children:"Messages Page Coming Soon... "})})}}}]);
+//# sourceMappingURL=7.7a6b7900.chunk.js.map

@@ -1,0 +1,2 @@
+(this["webpackJsonptwitter-clone"]=this["webpackJsonptwitter-clone"]||[]).push([[4],{95:function(t,e,n){"use strict";n.r(e);var c=n(6),i=n(7);e.default=function(){return Object(c.useEffect)((function(){document.title="Explore / Twitter"}),[]),Object(i.jsx)("div",{children:Object(i.jsx)("h1",{children:"Explore Page Coming Soon..."})})}}}]);
+//# sourceMappingURL=4.70b876dc.chunk.js.map

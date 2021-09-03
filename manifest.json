@@ -1,21 +1,21 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Twitterrr",
+  "name": "Twitterrr Clone",
   "icons": [
     {
-      "src": "twitter.png",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "src": "twitter-36x36.png",
+      "sizes": "36x36",
       "type": "image/x-icon"
     },
     {
-      "src": "twitter.png",
+      "src": "twitter-192x192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "twitter.png",
+      "src": "twitter-256x256.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "256x256"
     }
   ],
   "start_url": ".",
