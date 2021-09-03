@@ -1,14 +1,13 @@
 import React, { useState, useEffect, Suspense } from "react";
 import styled from "styled-components";
 
-
 import { Route, Switch, useLocation, Redirect } from "react-router-dom";
 import { GlobalStyles } from "./styles/globalstyles";
 import NavBar from "./components/navbar";
 import TrendingBar from "./components/trendingbar";
 import LoadingAnim from "./assets/loading.svg";
 
-import { auth, createUserProfileDocument } from './firebase/firebase';
+import { auth, createUserProfileDocument } from "./firebase/firebase";
 
 import SignUp from "./pages/signuppage";
 const HomePage = React.lazy(() => import("./pages/homepage"));
@@ -18,60 +17,58 @@ const NotificationPage = React.lazy(() => import("./pages/notificationpage"));
 const MessagesPage = React.lazy(() => import("./pages/messagespage"));
 const BookmarkPage = React.lazy(() => import("./pages/bookmarkpage"));
 const ListPage = React.lazy(() => import("./pages/listspage"));
-const WelcomePage = React.lazy(() => import('./pages/welcomepage'));
-
-
+const WelcomePage = React.lazy(() => import("./pages/welcomepage"));
 
 function App() {
   // loading screen
   const [isLoading, setLoading] = useState(true);
   useEffect(() => {
     setTimeout(() => {
-      setLoading(false)
+      setLoading(false);
     }, 500);
   }, []);
 
   // google signin states
   const [currentUser, setCurrentUser] = useState(null);
   useEffect(() => {
-    auth.onAuthStateChanged(async userAuth => {
+    auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = createUserProfileDocument(userAuth);
-        (await userRef).onSnapshot(snapShot => {
+        (await userRef).onSnapshot((snapShot) => {
           setCurrentUser({
             id: snapShot.id,
-            ...snapShot.data()
+            ...snapShot.data(),
           });
-        })
+        });
       } else {
         setCurrentUser(userAuth);
       }
-    })
+    });
   }, []);
 
   // hide elements on signup page
   let location = useLocation();
   if (location.pathname === "/") {
-    return (
-    isLoading 
-    ? 
-      <ImageStyle> 
-        <img src={LoadingAnim} alt='Loading...' /> 
-      </ImageStyle> 
-    : 
-      <div> 
-        <GlobalStyles /> 
+    return isLoading ? (
+      <ImageStyle>
+        <img src={LoadingAnim} alt="Loading..." />
+      </ImageStyle>
+    ) : (
+      <div>
+        <GlobalStyles />
         <Route exact path="/">
-          {
-            currentUser ? <Redirect to='/home' /> : <SignUp />
-          }
+          {currentUser ? <Redirect to="/home" /> : <SignUp />}
         </Route>
       </div>
-    )
+    );
   }
 
-  return (
-    isLoading ? <ImageStyle> <img src={LoadingAnim} alt='Loading...' /> </ImageStyle> :
+  return isLoading ? (
+    <ImageStyle>
+      {" "}
+      <img src={LoadingAnim} alt="Loading..." />{" "}
+    </ImageStyle>
+  ) : (
     <AppStyle>
       <GlobalStyles />
       <NavBar currentUser={currentUser} />
